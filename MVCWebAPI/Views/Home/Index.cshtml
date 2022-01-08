@@ -1,0 +1,103 @@
+﻿@model MVCWebAPI.Models.UserMasterModel
+
+@{
+    ViewBag.Title = "Home Page";
+
+
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formProduct" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>User Records</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearTextBox();">Add New Employee</button><br /><br />
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                        User Email
+                    </th>
+                    <th>
+                        User Photo
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="EmployeeId">ID</label>
+                        @*  <input type="text" class="form-control" id="UserId" placeholder="Id" disabled="disabled" />*@
+                        @Html.TextBoxFor(model => model.uID, new { @class = "form-control", @disabled = "true" })
+
+
+                    </div>
+                    <div class="form-group">
+                        <label>User Name</label>
+                        @*<input type="text" class="form-control" maxlength="10" id="UserNameId" placeholder="User Name" />*@
+
+                        @Html.TextBoxFor(model => model.uName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.uName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        @* <input type="text" class="form-control" id="UserEmailID" placeholder="User Email" />*@
+                        @Html.TextBoxFor(model => model.uEmail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.uEmail, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <input type="file" class="form-control" id="uPhotoFile" />
+                        <img src="" name="ProdImage" id="UserImage" height="100" width="100" />
+
+                        <input type="hidden" name="UserImageHidden" id="UserImageHiddenId" value="" />
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return AddUserData();">Add</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateData();">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/AjaxCall/Home_Index_JsonCall.js"></script>
+}

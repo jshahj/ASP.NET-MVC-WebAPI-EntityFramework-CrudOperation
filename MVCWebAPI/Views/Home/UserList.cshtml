@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVCWebAPI.Models.UserMasterModel>
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+<h2>UserList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.uID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uPhoto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.uID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uPhoto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
